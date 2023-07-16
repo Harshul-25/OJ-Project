@@ -7,7 +7,7 @@ if (!fs.existsSync(dirCodes)) {
   fs.mkdirSync(dirCodes, { recursive: true });
 }
 
-async function generateCppFile(format, code) {
+async function generateFile(format, code) {
   const jobId = uuid();
   const filename = `${jobId}.${format}`;
   const filepath = path.join(dirCodes, filename);
@@ -15,4 +15,12 @@ async function generateCppFile(format, code) {
   return filepath
 }
 
-module.exports = { generateCppFile };
+
+async function generateInput(content){
+  const filename = `input.txt`;
+  const filepath = path.join(dirCodes,filename);
+  await fs.writeFileSync(filepath,content);
+  return filepath;
+}
+
+module.exports = { generateFile,generateInput };

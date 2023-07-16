@@ -3,7 +3,7 @@ const {Prob} = require ("../models/prob.js");
 async function getProblems(req,res){
     try {
         const problems = await Prob.find();
-        console.log(problems);
+        console.log("was called");
         res.status(200).json(problems);
       } catch (e) {
         console.log(e);

@@ -5,7 +5,6 @@ const {runCode} = require('../controllers/runcode.js')
 const router = express.Router();
 
 
-// router.post('/upload', upload.single('file'), uploadImage);
 router.get('/getAllproblems', getProblems);
 router.post('/login',checkLogin)
 router.post('/register',signup)

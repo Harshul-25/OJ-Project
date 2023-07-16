@@ -19,7 +19,7 @@ export default function Login() {
         }
       });
     } catch (error) {
-      console.log(error).msg("Error while registering");
+      console.log(error)
     }
   };
   return (

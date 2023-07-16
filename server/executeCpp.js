@@ -9,7 +9,7 @@ const executeCpp = (filepath) => {
   const outpath = path.join(outputPath, `${jobId}.out`);
   return new Promise((resolve, reject) => {
     exec(
-      `g++ ${filepath} -o ${outpath} && cd ${outputPath} && ./${jobId}.out`,
+      `g++ ${filepath} -o ${outpath} && cd ${outputPath} && ./${jobId}.out<input.txt`,
       (error, stdout, stderr) => {
         if (error) {
           reject({ error, stderr });
