@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const ProbSchema = new mongoose.Schema({
     id: {
@@ -17,4 +17,4 @@ const ProbSchema = new mongoose.Schema({
 
 const Prob = mongoose.model('Problems', ProbSchema);
 
-export default Prob;
+module.exports= {Prob};

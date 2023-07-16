@@ -1,27 +1,7 @@
-import User from "../models/user.js";
-
-// app.post("/",async(req,res)=>{
-//     const{email,password}=req.body
-
-//     try{
-//         const check=await collection.findOne({email:email})
-
-//         if(check){
-//             res.json("exist")
-//         }
-//         else{
-//             res.json("notexist")
-//         }
-
-//     }
-//     catch(e){
-//         res.json("fail")
-//     }
-
-// })
+const {User} = require ("../models/user.js");
 
 
- export async function checkLogin(req,res){
+ async function checkLogin(req,res){
     const {mail, pass} = req.body
     try {
         const check= await User.findOne({email:mail,password:pass})
@@ -36,7 +16,7 @@ import User from "../models/user.js";
     }
 }
 
-export async function signup(req,res){
+async function signup(req,res){
     const {mail, handle, pass, name}= req.body
     console.log(mail,handle,pass,name);
     const newUser = new User({handle:handle,name:name,email:mail,password:pass})
@@ -56,3 +36,4 @@ export async function signup(req,res){
     }
 }
 
+module.exports ={checkLogin, signup}

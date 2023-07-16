@@ -1,6 +1,7 @@
-import express from 'express';
-import getProblems from '../controllers/getproblems.js';
-import { checkLogin, signup } from '../controllers/login_and_register.js';
+const express =require('express');
+const {getProblems} = require('../controllers/getproblems.js');
+const { checkLogin, signup } = require ('../controllers/login_and_register.js');
+const {runCode} = require('../controllers/runcode.js')
 const router = express.Router();
 
 
@@ -8,4 +9,6 @@ const router = express.Router();
 router.get('/getAllproblems', getProblems);
 router.post('/login',checkLogin)
 router.post('/register',signup)
-export default router;
+router.post('/run',runCode)
+
+module.exports = {router}

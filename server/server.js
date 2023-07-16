@@ -1,7 +1,7 @@
-import express from 'express';
-import cors from 'cors';
-import router from './routes/routes.js';
-import DBConnection from './db.js';
+const express = require ('express');
+const cors = require ('cors');
+const {router} = require('./routes/routes.js');
+const {DBConnection} = require ('./db.js');
 
 const app = express();
 
@@ -12,6 +12,6 @@ app.use('/', router);
 
 const PORT = 8000;
 
-DBConnection();
+// DBConnection();
 
 app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
