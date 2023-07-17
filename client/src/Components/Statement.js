@@ -1,9 +1,12 @@
 import React from 'react';
 
-export default function Statement(){
+export default function Statement({name, description}){
+    console.log(typeof(description));
     return (
         <section className='statement'>
-            Statement here
+            <h1>{name}</h1>
+            <br/>
+            <p style={{height:"100%", "white-space":"pre-wrap"}}>{description}</p>
         </section>
     )
 }

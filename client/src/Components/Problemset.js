@@ -9,24 +9,20 @@ export default function Problemset(){
 
     const [data, setData] = useState([]);
 
-  useEffect(() => {
-    // fetch data
-    const dataFetch = async () => {
-      const data = await (
-        await fetch(
-          "http://localhost:8000/getAllproblems"
-        )
-      ).json();
 
-      // set state when the data received
-      setData(data);
-    };
-
-    dataFetch();
+    useEffect(() => {
+        const getdata= async () =>{
+            try {
+                await axios.get("http://localhost:8000/getAllproblems").then(res=>setData(res.data))
+            } catch (error) {
+                console.log(error,"something went wrong")
+            }
+        }
+        getdata()
   }, []);
 
   console.log(data);
-
+    const problems = data.map((i)=>{return <Probcard id={i.id} name={i.name} description={i.description} />})
 
 
     return(
@@ -34,12 +30,7 @@ export default function Problemset(){
             <h1> Online Judge </h1>
             <Nav/>
             <div className='problems-wrapper'>
-                <Probcard/>
-                <Probcard/>
-                <Probcard/>
-                <Probcard/>
-                <Probcard/>
-                <Probcard/>
+                {problems}
             </div>
         </div>
     )
