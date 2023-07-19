@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({loginFunction}) {
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
   const Nav = useNavigate();
@@ -11,11 +11,13 @@ export default function Login() {
     e.preventDefault();
     try {
       axios.post("http://localhost:8000/login", { mail, pass }).then((res) => {
-        console.log(res);
-        if (res.data === "failed") {
+        if (res.data.status === "failed") {
           alert("Please enter valid email or password");
-        } else if (res.data === "success") {
-          Nav("/problemset", { state: { email: mail } });
+        } else if (res.data.status === "success") {
+          loginFunction();
+          sessionStorage.setItem('name',res.data.check.name)
+          sessionStorage.setItem('handle',res.data.check.handle)
+          Nav("/problemset");
         }
       });
     } catch (error) {

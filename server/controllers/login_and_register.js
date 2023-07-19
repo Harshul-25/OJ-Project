@@ -6,10 +6,10 @@ const {User} = require ("../models/user.js");
     try {
         const check= await User.findOne({email:mail,password:pass})
         if(check){
-            res.send("success")
+           return res.json({status:"success",check})
         }
         else{
-            res.send("failed")
+           return res.json({status:"failed"})
         }
     } catch (error) {
        console.log(error).msg("unable to login"); 

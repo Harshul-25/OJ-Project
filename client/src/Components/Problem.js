@@ -2,18 +2,19 @@ import React from 'react';
 import Nav from './Nav';
 import Editor from './Editor';
 import Statement from './Statement';
-import { useLocation } from 'react-router-dom';
+import { useLocation,useParams } from 'react-router-dom';
 
-function Problem(){
+function Problem({loginFunction}){
     const location = useLocation();
     const {name , description} = location.state;
+    const {id} = useParams();
 
     return(
         <div className='main-wrapper'>
-            <Nav/>
+            <Nav loginFunction={loginFunction}/>
             <div className='main-content'>
               <Statement name={name} description={description}/>
-              <Editor/>
+              <Editor id={id}/>
             </div>
         </div>
     )

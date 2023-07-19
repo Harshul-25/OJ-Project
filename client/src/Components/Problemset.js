@@ -2,13 +2,11 @@ import React from 'react';
 import Nav from './Nav';
 import Probcard from './Probcard';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
 
-
-export default function Problemset(){
+export default function Problemset({loginFunction}){
 
     const [data, setData] = useState([]);
-
 
     useEffect(() => {
         const getdata= async () =>{
@@ -20,15 +18,14 @@ export default function Problemset(){
         }
         getdata()
   }, []);
-
-  console.log(data);
+  
     const problems = data.map((i)=>{return <Probcard id={i.id} name={i.name} description={i.description} />})
 
 
     return(
         <div className='problem-page'>
             <h1> Online Judge </h1>
-            <Nav/>
+            <Nav loginFunction={loginFunction}/>
             <div className='problems-wrapper'>
                 {problems}
             </div>

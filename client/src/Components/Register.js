@@ -17,7 +17,7 @@ export default function Register() {
           if (res.data === "exists") {
             alert("User already exists");
           } else if (res.data === "success") {
-            Nav("/problemset", { state: { handle: handle, email: mail } });
+            Nav("/");
           }
         });
     } catch (error) {

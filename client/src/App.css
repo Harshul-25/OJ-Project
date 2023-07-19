@@ -18,6 +18,7 @@ html,body {
 }
 
 .navbar{
+  display: flex;
   height: 10%;
   min-height: 55px;
 }
@@ -30,8 +31,16 @@ html,body {
   padding: 10px;
 }
 
-.nav-content>li,.theme{
+.nav-content>li{
   margin-left: 20px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.navbar>div{
+  margin-top:8px;
+  margin-bottom: 8px;
+  margin-right: 20px;
   padding: 5px;
   border-radius: 5px;
 }
@@ -43,6 +52,7 @@ html,body {
   height: 100%;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .main-content{
@@ -54,16 +64,14 @@ html,body {
 .statement{
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   flex-shrink: 1;
-  min-width: 35%;
+  width: 50%;
 }
 
 .editor{
   display: flex;
-  min-width: 50%;
+  width: 50%;
   flex-direction: column;
-  flex-grow: 1;
 }
 
 .editor>textarea{
@@ -165,11 +173,33 @@ html,body {
   width: 100%;
   height: 35%;
 }
-.output>textarea{
+
+.output>textarea,.output>p{
   display: block;
   width: 100%;
   height: 95%;
 }
+
 .output>button{
   padding: 10px;
+}
+
+.window-btns{
+ display: flex;
+}
+
+.window-btns>button{
+  margin-left: 15px;
+  width: 25%;
+  padding: 5px;
+}
+
+.submit-btns{
+  display: flex;
+}
+
+.submit-btns>button{
+  margin-left: 15px;
+  padding: 5px;
+  width: 25%;
 }
