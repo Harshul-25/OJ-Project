@@ -93,6 +93,12 @@ html,body {
   padding-top:10px ;
 }
 
+.problem-page>h2{
+  height: 10%;
+  text-align: center;
+  padding-top: 10px;
+}
+
 .problems-wrapper{
   height: 100%;
   box-sizing: border-box;
@@ -110,8 +116,30 @@ html,body {
   display: flex;
   padding :10px
 }
+
 .pcard:hover{
   cursor: pointer;
+}
+
+.subcard{
+  width: 100%;
+  max-width: 1200px;
+  height: 13%;
+  border-radius: 5px;
+  margin-top: 18px;
+  align-self: center;
+  display: flex;
+  padding :10px
+}
+
+.sub-element{
+  text-align: center;
+  padding-top: 10px;
+  flex:1
+}
+
+.sub-element:nth-of-type(1){
+  flex: 3
 }
 
 .tag{
@@ -122,7 +150,7 @@ html,body {
 }
 
 .form-wrapper{
-  /* background-color: darkkhaki; */
+  width: 100%;
   background: linear-gradient(#e66465, #9198e5);
   display: flex;
   flex-direction: column;
@@ -133,6 +161,12 @@ html,body {
 }
 .form-wrapper>form{
   width: 100%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 300px;
+  
 }
 .form-wrapper>form{
   display: flex;
@@ -202,4 +236,23 @@ html,body {
   margin-left: 15px;
   padding: 5px;
   width: 25%;
+}
+
+.ide-wrapper{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ide{
+  display: flex;
+  width: 75%;
+  height: 100%;
+  flex-direction: column;
+  align-self: center;
+}
+
+.ide>textarea{
+  width: 100%;
+  height: 75%;
 }

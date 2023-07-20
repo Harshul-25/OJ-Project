@@ -15,6 +15,7 @@ export default function Login({loginFunction}) {
           alert("Please enter valid email or password");
         } else if (res.data.status === "success") {
           loginFunction();
+          sessionStorage.setItem('token',res.data.check._id)
           sessionStorage.setItem('name',res.data.check.name)
           sessionStorage.setItem('handle',res.data.check.handle)
           Nav("/problemset");

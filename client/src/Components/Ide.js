@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
+import Nav from './Nav'
 import { useState } from 'react';
 import axios from 'axios';
-export default function Editor({id}){
+export default function IDE({loginFunction}){
     const [code,setCode] = useState('');
     const [input,setInput]=useState('');
     const[output,setOutput]=useState('');
@@ -26,33 +27,9 @@ export default function Editor({id}){
         }
     }
 
-    const handleSubmit = async () =>{
-        setOutput("Loading...")
-        setOutwindow('output')
-        const payload = {
-            language: "cpp",
-            code: code,
-            id: id
-        }
-        try {
-            const {data} = await axios.post("http://localhost:8000/submit", payload)
-            const {accepted, totalcases}=data;
-            if(accepted===totalcases){
-                setOutput(`Verdict: Accepted\nDetails: ${accepted}/${totalcases} test cases passed`)
-            }
-            else{
-                setOutput(`Verdict: Wrong Answer\nDetails: ${accepted}/${totalcases} test cases passed`)
-            }
-        } catch (error) {
-            // console.log(error.response);
-            const msg = error.response.data.err.stderr;
-            const e=msg.split("error:")[1];
-            setOutput("Compilation or Run time Error:\n"+e)
-        }
-    }
-
-    return (
-        <section className='editor'>
+    return (<div className="ide-wrapper">
+            <Nav loginFunction={loginFunction}/>
+        <section className='ide'>
             <textarea onChange={(e)=>setCode(e.target.value)} value={code} placeholder=' Write your code here'></textarea>
             <div className='output'>
                 <div className='window-btns'>
@@ -60,12 +37,12 @@ export default function Editor({id}){
                     <button onClick={()=>setOutwindow('output')}>output</button>
                 </div>
                 {(outwindow==='input')&&<textarea onChange={(e)=>setInput(e.target.value)} value={input} placeholder='input here'></textarea>}
-                {(outwindow==='output')&&<p style={{"white-space":"pre-wrap", overflow:"auto"}}>{output}</p>}
+                {(outwindow==='output')&&<p style={{"white-space":"pre-wrap",overflow:"auto"}}>{output}</p>}
                 <div className='submit-btns'>
                 <button onClick={handleClick}>Run</button>
-                <button onClick={handleSubmit}>Submit</button>
                 </div>
             </div>
         </section>
+        </div>
     )
 }

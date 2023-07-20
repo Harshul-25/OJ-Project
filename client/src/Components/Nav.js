@@ -8,13 +8,14 @@ export default function Nav({loginFunction}){
     const logout=()=>{
         sessionStorage.clear();
         loginFunction()
+        Nav('/')
     }
     return(
         <nav className='navbar'>
             <ul className='nav-content'>
                 <li onClick={handleClick}>PROBLEMSET</li>
                 <li>MY SUBMISSIONS</li>
-                <li>IDE</li>
+                <li onClick={()=>{Nav('/ide')}}>IDE</li>
             </ul>
                 <div onClick={logout}>Logout</div>
                 <div>{handle}</div>
