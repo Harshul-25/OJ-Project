@@ -1,23 +1,29 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-export default function Editor({id}){
-    const [code,setCode] = useState('');
+export default function Editor({id,name,codecontent}){
+    
+    let intial='';
+    if(codecontent!==undefined){
+        intial=codecontent;
+    }
+
+    const [code,setCode] = useState(intial);
     const [input,setInput]=useState('');
     const[output,setOutput]=useState('');
     const [outwindow,setOutwindow]=useState('input')
-    const handleClick= async ()=>{
+    
+    const handleRun= async ()=>{
         setOutput("Loading...")
         setOutwindow('output')
         const payload = {
             language: "cpp",
             code: code,
-            input: input
+            input: input,
         }
         try {
             const {data} = await axios.post("http://localhost:8000/run", payload)
             setOutput("Output: \n"+data.output)
-            console.log(data)
         } catch (error) {
             // console.log(error.response);
             const msg = error.response.data.err.stderr;
@@ -26,13 +32,16 @@ export default function Editor({id}){
         }
     }
 
+    const usermail=sessionStorage.getItem('mail')
     const handleSubmit = async () =>{
         setOutput("Loading...")
         setOutwindow('output')
         const payload = {
             language: "cpp",
             code: code,
-            id: id
+            id: id,
+            probname:name,
+            mail:usermail
         }
         try {
             const {data} = await axios.post("http://localhost:8000/submit", payload)
@@ -62,7 +71,7 @@ export default function Editor({id}){
                 {(outwindow==='input')&&<textarea onChange={(e)=>setInput(e.target.value)} value={input} placeholder='input here'></textarea>}
                 {(outwindow==='output')&&<p style={{"white-space":"pre-wrap", overflow:"auto"}}>{output}</p>}
                 <div className='submit-btns'>
-                <button onClick={handleClick}>Run</button>
+                <button onClick={handleRun}>Run</button>
                 <button onClick={handleSubmit}>Submit</button>
                 </div>
             </div>

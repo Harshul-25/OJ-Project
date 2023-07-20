@@ -2,7 +2,7 @@ import React from "react";
 import Nav from './Nav'
 import { useState } from 'react';
 import axios from 'axios';
-export default function IDE({loginFunction}){
+export default function IDE(){
     const [code,setCode] = useState('');
     const [input,setInput]=useState('');
     const[output,setOutput]=useState('');
@@ -28,7 +28,7 @@ export default function IDE({loginFunction}){
     }
 
     return (<div className="ide-wrapper">
-            <Nav loginFunction={loginFunction}/>
+            <Nav/>
         <section className='ide'>
             <textarea onChange={(e)=>setCode(e.target.value)} value={code} placeholder=' Write your code here'></textarea>
             <div className='output'>

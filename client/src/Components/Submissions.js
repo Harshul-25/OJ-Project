@@ -1,18 +1,44 @@
-import React from "react"
-import Nav from "./Nav"
-import Subcard from "./Subcard"
+import React from "react";
+import Nav from "./Nav";
+import Subcard from "./Subcard";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-export default function Submissions(){
-    
-return(
-    <div className='problem-page'>
-        <h2> User_handle submissions </h2>
-        <Nav/>
-        <div className='problems-wrapper'>
-            <Subcard/>
-            <Subcard/>
-            <Subcard/>
-            <Subcard/>
-        </div>
+export default function Submissions() {
+  const [data, setData] = useState([]);
+  const mail = sessionStorage.getItem("mail");
+  
+  useEffect(() => {
+    const getdata = async () => {
+      try {
+        await axios
+          .post("http://localhost:8000/getsubmissions", { mail })
+          .then((res) => setData(res.data));
+      } catch (error) {
+        console.log(error, "something went wrong");
+      }
+    };
+    getdata();
+  },[]);
+
+  const subs = data.map((i) => {
+    return (
+      <Subcard
+        id={i.problemid}
+        name={i.probname}
+        code={i.code}
+        verdict={i.verdict}
+        lang={i.language}
+        time={i.submittedAt}
+      />
+    );
+  });
+
+  return (
+    <div className="problem-page">
+      <h2> User_handle submissions </h2>
+      <Nav />
+      <div className="problems-wrapper">{subs}</div>
     </div>
-)}
+  );
+}

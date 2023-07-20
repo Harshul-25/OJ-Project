@@ -1,7 +1,6 @@
 import React from 'react';
 
 export default function Statement({name, description}){
-    console.log(typeof(description));
     return (
         <section className='statement'>
             <h1>{name}</h1>

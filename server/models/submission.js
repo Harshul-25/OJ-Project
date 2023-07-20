@@ -10,8 +10,8 @@ const SubSchema = mongoose.Schema({
     required: true,
   },
   submittedAt: {
-    type: Date,
-    default: Date.now,
+    type: String,
+    required:true
   },
   verdict: {
     type: String,
@@ -20,6 +20,10 @@ const SubSchema = mongoose.Schema({
   problemid: {
     type:String,
     required: true
+  },
+  probname:{
+    type:String,
+    required:true
   },
   usermail: {
     type:String,

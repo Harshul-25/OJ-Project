@@ -4,7 +4,7 @@ import Probcard from './Probcard';
 import axios from 'axios';
 import { useState, useEffect} from 'react';
 
-export default function Problemset({loginFunction}){
+export default function Problemset(){
 
     const [data, setData] = useState([]);
 
@@ -25,7 +25,7 @@ export default function Problemset({loginFunction}){
     return(
         <div className='problem-page'>
             <h1> Online Judge </h1>
-            <Nav loginFunction={loginFunction}/>
+            <Nav/>
             <div className='problems-wrapper'>
                 {problems}
             </div>

@@ -10,7 +10,6 @@ import Protected from "./Components/Protected";
 import IDE from "./Components/Ide";
 import Submissions from "./Components/Submissions";
 
-
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(false);
   const logIn = () => {
@@ -24,33 +23,40 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Login loginFunction={logIn} />} />
+          <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route
             path="/problemset"
             element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <Problemset loginFunction={logOut} />
+              <Protected>
+                <Problemset />
               </Protected>
             }
           />
           <Route
             path="/problem/:id"
             element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <Problem loginFunction={logOut} />
+              <Protected>
+                <Problem />
               </Protected>
             }
           />
           <Route
             path="/ide"
             element={
-              <Protected isLoggedIn={isLoggedIn}>
-                <IDE loginFunction={logOut} />
+              <Protected>
+                <IDE />
               </Protected>
             }
           />
-          <Route path="/submissions" element={<Submissions/>} />
+          <Route
+            path="/submissions"
+            element={
+              <Protected>
+                <Submissions />
+              </Protected>
+            }
+          />
         </Routes>
       </Router>
     </>

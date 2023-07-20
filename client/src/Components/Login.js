@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-export default function Login({loginFunction}) {
+export default function Login() {
   const [mail, setMail] = useState("");
   const [pass, setPass] = useState("");
   const Nav = useNavigate();
@@ -14,9 +14,8 @@ export default function Login({loginFunction}) {
         if (res.data.status === "failed") {
           alert("Please enter valid email or password");
         } else if (res.data.status === "success") {
-          loginFunction();
           sessionStorage.setItem('token',res.data.check._id)
-          sessionStorage.setItem('name',res.data.check.name)
+          sessionStorage.setItem('mail',res.data.check.email)
           sessionStorage.setItem('handle',res.data.check.handle)
           Nav("/problemset");
         }
