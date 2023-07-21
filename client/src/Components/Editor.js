@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 export default function Editor({id,name,codecontent}){
-    
+
     let intial='';
     if(codecontent!==undefined){
         intial=codecontent;
@@ -13,7 +13,8 @@ export default function Editor({id,name,codecontent}){
     const[output,setOutput]=useState('');
     const [outwindow,setOutwindow]=useState('input')
     
-    const handleRun= async ()=>{
+    const handleRun= async (e)=>{
+        e.target.disabled=true;
         setOutput("Loading...")
         setOutwindow('output')
         const payload = {
@@ -30,10 +31,12 @@ export default function Editor({id,name,codecontent}){
             const e=msg.split("error:")[1];
             setOutput("Compilation or Run time Error:\n"+e)
         }
+        e.target.disabled=false;
     }
 
     const usermail=sessionStorage.getItem('mail')
-    const handleSubmit = async () =>{
+    const handleSubmit = async (e) =>{
+        e.target.disabled=true;
         setOutput("Loading...")
         setOutwindow('output')
         const payload = {
@@ -58,6 +61,7 @@ export default function Editor({id,name,codecontent}){
             const e=msg.split("error:")[1];
             setOutput("Compilation or Run time Error:\n"+e)
         }
+        e.target.disabled=false;
     }
 
     return (
@@ -71,8 +75,8 @@ export default function Editor({id,name,codecontent}){
                 {(outwindow==='input')&&<textarea onChange={(e)=>setInput(e.target.value)} value={input} placeholder='input here'></textarea>}
                 {(outwindow==='output')&&<p style={{"white-space":"pre-wrap", overflow:"auto"}}>{output}</p>}
                 <div className='submit-btns'>
-                <button onClick={handleRun}>Run</button>
-                <button onClick={handleSubmit}>Submit</button>
+                <button onClick={(e)=>handleRun(e)}>Run</button>
+                <button onClick={(e)=>handleSubmit(e)}>Submit</button>
                 </div>
             </div>
         </section>

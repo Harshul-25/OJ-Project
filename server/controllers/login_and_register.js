@@ -18,7 +18,6 @@ const {User} = require ("../models/user.js");
 
 async function signup(req,res){
     const {mail, handle, pass, name}= req.body
-    console.log(mail,handle,pass,name);
     const newUser = new User({handle:handle,name:name,email:mail,password:pass})
     console.log(newUser);
     try {

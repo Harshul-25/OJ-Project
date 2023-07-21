@@ -7,7 +7,7 @@ import axios from "axios";
 export default function Submissions() {
   const [data, setData] = useState([]);
   const mail = sessionStorage.getItem("mail");
-  
+  const handle = sessionStorage.getItem('handle');
   useEffect(() => {
     const getdata = async () => {
       try {
@@ -36,7 +36,7 @@ export default function Submissions() {
 
   return (
     <div className="problem-page">
-      <h2> User_handle submissions </h2>
+      <h2> {handle} submissions </h2>
       <Nav />
       <div className="problems-wrapper">{subs}</div>
     </div>

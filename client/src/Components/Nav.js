@@ -10,6 +10,7 @@ export default function Nav(){
         Nav('/')
     }
     return(
+        <div className='nav-wrapper'>
         <nav className='navbar'>
             <ul className='nav-content'>
                 <li onClick={handleClick}>PROBLEMSET</li>
@@ -19,5 +20,6 @@ export default function Nav(){
                 <div onClick={logout}>Logout</div>
                 <div>{handle}</div>
         </nav>
+        </div>
     )
 }

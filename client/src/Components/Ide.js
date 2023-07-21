@@ -7,7 +7,8 @@ export default function IDE(){
     const [input,setInput]=useState('');
     const[output,setOutput]=useState('');
     const [outwindow,setOutwindow]=useState('input')
-    const handleClick= async ()=>{
+    const handleClick= async (e)=>{
+        e.target.disabled=true;
         setOutput("Loading...")
         setOutwindow('output')
         const payload = {
@@ -25,6 +26,7 @@ export default function IDE(){
             const e=msg.split("error:")[1];
             setOutput("Compilation or Run time Error:\n"+e)
         }
+        e.target.disabled=false;
     }
 
     return (<div className="ide-wrapper">
@@ -39,7 +41,7 @@ export default function IDE(){
                 {(outwindow==='input')&&<textarea onChange={(e)=>setInput(e.target.value)} value={input} placeholder='input here'></textarea>}
                 {(outwindow==='output')&&<p style={{"white-space":"pre-wrap",overflow:"auto"}}>{output}</p>}
                 <div className='submit-btns'>
-                <button onClick={handleClick}>Run</button>
+                <button onClick={(e)=>handleClick(e)}>Run</button>
                 </div>
             </div>
         </section>
