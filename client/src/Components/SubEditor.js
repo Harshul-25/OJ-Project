@@ -2,19 +2,29 @@ import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import stubs from "./stubs";
-export default function Editor({ id, name }) {
-  const initial = stubs.cpp;
+
+export default function SubEditor({ id, name , codecontent, lang}) {
+  let initial = codecontent;
+  const isfromsub= sessionStorage.getItem("fromsub");
  
   const [code, setCode] = useState(initial);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [outwindow, setOutwindow] = useState("input");
-  const [language, setLanguage] = useState("cpp");
+  const [language, setLanguage] = useState(lang);
 
   useEffect(() => {
+        if(!isfromsub)
+        console.log("I was called");
         setCode(stubs[language]);
-  }, [language]);
+  }, [language,isfromsub]);
 
+  useEffect(()=>{
+    if(isfromsub){
+      setCode(codecontent)
+      setLanguage(lang)
+    }
+  },[codecontent,lang])
 
   const handleRun = async (e) => {
     e.target.disabled = true;
@@ -30,7 +40,7 @@ export default function Editor({ id, name }) {
       setOutput("Output: \n" + data.output);
     } catch (error) {
       const msg = error.response.data.err.stderr;
-      // console.log(error.response);
+      console.log(error.response);
       // console.log(msg);
       let e = msg.split("error:")[1];
       if(language==='py'){
@@ -92,6 +102,7 @@ export default function Editor({ id, name }) {
             );
             if (shouldSwitch) {
               setLanguage(e.target.value);
+              sessionStorage.setItem("fromsub",false);
             }
           }}
         >

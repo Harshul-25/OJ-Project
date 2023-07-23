@@ -1,6 +1,6 @@
 const { generateFile, generateInput } = require("../generateFile");
 const { getTestcases } = require("../getTestcases");
-const { executeCpp } = require("../executeCpp");
+const { executeCpp, executePy, executeC } = require("../executeFile");
 const { Sub } = require("../models/submission");
 const fs = require("fs-extra");
 const path = require("path");
@@ -35,10 +35,19 @@ const submitCode = async (req, res) => {
 
   let accepted = 0;
   const totalcases = testcases.length;
+  let output;
   for (let i = 0; i < testcases.length; i++) {
     try {
       const inputfile = await generateInput(testcases[i].input);
-      const output = await executeCpp(filepath);
+      if(language==='cpp'){
+        output = await executeCpp(filepath);
+      }
+      else if(language==='py'){
+        output = await executePy(filepath);
+      }
+      else if (language==='c'){
+        output = await executeC(filepath);
+      }
       const out = output.trim();
       if (out == testcases[i].output) {
         accepted = accepted + 1;

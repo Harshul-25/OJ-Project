@@ -92,6 +92,8 @@ html,body {
 }
 
 .main-content{
+  background-color: #E9ECEF;
+
   flex-grow: 1;
   box-sizing: border-box;
   display: flex;
@@ -114,6 +116,14 @@ html,body {
   width: 100%;
   height: 65%;
 }
+
+.statement{
+  height: 100%;
+  padding: 20px;
+  white-space: pre-wrap;
+}
+
+
 
 .problem-page{
   padding: 10px;
@@ -263,6 +273,9 @@ html,body {
 }
 
 .output>textarea,.output>p{
+  resize: none;
+  border: solid black 1px;
+  background-color: #f8f9fa;
   display: block;
   width: 100%;
   height: 95%;
@@ -293,6 +306,8 @@ html,body {
 }
 
 .ide-wrapper{
+  background-color: #E9ECEF;
+
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -309,6 +324,17 @@ html,body {
 .ide>textarea{
   width: 100%;
   height: 75%;
+}
+
+.lang{
+  padding: 5px;
+}
+
+.lang>label{
+  padding: 5px;
+}
+.lang>select{
+  width: 70px;
 }
 
 @media screen and (max-width: 550px) {

@@ -7,7 +7,7 @@ import { useState, useEffect} from 'react';
 export default function Problemset(){
 
     const [data, setData] = useState([]);
-
+    sessionStorage.setItem("fromsub",false);
     useEffect(() => {
         const getdata= async () =>{
             try {

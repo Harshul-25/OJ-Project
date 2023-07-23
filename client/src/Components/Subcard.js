@@ -6,7 +6,8 @@ export default function Subcard({id,name,code,verdict,lang,time}){
     const handleClick = async ()=>{
         const desc = await axios.post("http://localhost:8000/getstatement",{id})
         const description=desc.data;
-        Nav(`/problem/${id}`,{state: {name,description,code}})
+        sessionStorage.setItem('fromsub',true);
+        Nav(`/problem/${id}`,{state: {name,description,code,lang}})
     }
 
     const map = new Map();
