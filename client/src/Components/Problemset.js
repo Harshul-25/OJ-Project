@@ -19,7 +19,7 @@ export default function Problemset(){
         getdata()
   }, []);
   
-    const problems = data.map((i)=>{return <Probcard id={i.id} name={i.name} description={i.description} />})
+    const problems = data.map((i)=>{return <Probcard id={i.id} name={i.name} description={i.description} tag={i.tag}/>})
 
 
     return(

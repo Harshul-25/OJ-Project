@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Problem from "./Components/Problem";
 import "./App.css";
@@ -11,13 +10,13 @@ import IDE from "./Components/Ide";
 import Submissions from "./Components/Submissions";
 
 function App() {
-  const [isLoggedIn, setisLoggedIn] = useState(false);
-  const logIn = () => {
-    setisLoggedIn(true);
-  };
-  const logOut = () => {
-    setisLoggedIn(false);
-  };
+  // const [isLoggedIn, setisLoggedIn] = useState(false);
+  // const logIn = () => {
+  //   setisLoggedIn(true);
+  // };
+  // const logOut = () => {
+  //   setisLoggedIn(false);
+  // };
 
   return (
     <>

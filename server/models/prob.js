@@ -13,6 +13,9 @@ const ProbSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    tag: {
+        type:String
+    }
 },{collection:'Problems'})
 
 const Prob = mongoose.model('Problems', ProbSchema);

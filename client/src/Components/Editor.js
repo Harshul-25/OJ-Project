@@ -104,6 +104,7 @@ export default function Editor({ id, name }) {
         onChange={(e) => setCode(e.target.value)}
         value={code}
         placeholder=" Write your code here"
+        spellCheck="false"
       ></textarea>
       <div className="output">
         <div className="window-btns">

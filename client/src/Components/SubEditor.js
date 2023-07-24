@@ -113,6 +113,7 @@ export default function SubEditor({ id, name , codecontent, lang}) {
       </div>
       <textarea
         onChange={(e) => setCode(e.target.value)}
+        spellCheck="false"
         value={code}
         placeholder=" Write your code here"
       ></textarea>

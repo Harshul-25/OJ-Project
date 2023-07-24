@@ -3,6 +3,7 @@ import Nav from './Nav'
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import stubs from "./stubs";
+import Editor from '@monaco-editor/react';
 export default function IDE(){
     const [code,setCode] = useState('');
     const [input,setInput]=useState('');
@@ -57,7 +58,8 @@ export default function IDE(){
           <option value="py">Python</option>
         </select>
       </div>
-            <textarea onChange={(e)=>setCode(e.target.value)} value={code} placeholder=' Write your code here'></textarea>
+            {/* <textarea onChange={(e)=>setCode(e.target.value)} value={code} placeholder=' Write your code here' spellCheck="false"></textarea> */}
+            <Editor height="65%" value={code} language="cpp" onChange={(value)=>setCode(value)} options={{automaticLayout: true}}/>
             <div className='output'>
                 <div className='window-btns'>
                     <button onClick={()=>setOutwindow('input')}>input</button>
