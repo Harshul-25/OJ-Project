@@ -1,12 +1,20 @@
 const {User} = require ("../models/user.js");
-
+const {generateToken} = require('../generateJWT.js');
 
  async function checkLogin(req,res){
     const {mail, pass} = req.body
     try {
-        const check= await User.findOne({email:mail,password:pass})
-        if(check){
-           return res.json({status:"success",check})
+        const user= await User.findOne({email:mail,password:pass})
+        if(user){
+           const {error, token} = await generateToken({name:user.name,mail:user.email})
+           if (error) {
+            return res.status(500).json({
+              error: true,
+              message: "Couldn't create access token. Please try again later.",
+            });
+          } 
+          return res.json({status:"success",token, handle:user.handle});
+        //    return res.json({status:"success",user})
         }
         else{
            return res.json({status:"failed"})

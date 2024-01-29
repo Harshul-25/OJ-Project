@@ -364,6 +364,10 @@ html,body {
   width: 100px;
 }
 
+iframe{
+  display: none;
+}
+
 @media screen and (max-width: 550px) {
   .main-content{
     flex-direction: column;
@@ -391,3 +395,4 @@ html,body {
     height: 100%;
   }
 }
+

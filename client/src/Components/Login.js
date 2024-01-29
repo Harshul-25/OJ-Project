@@ -14,9 +14,10 @@ export default function Login() {
         if (res.data.status === "failed") {
           alert("Please enter valid email or password");
         } else if (res.data.status === "success") {
-          sessionStorage.setItem('token',res.data.check._id)
-          sessionStorage.setItem('mail',res.data.check.email)
-          sessionStorage.setItem('handle',res.data.check.handle)
+          sessionStorage.setItem('token',res.data.token)
+          axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
+          // sessionStorage.setItem('mail',res.data.check.email)
+          sessionStorage.setItem('handle',res.data.handle)
           Nav("/problemset");
         }
       });

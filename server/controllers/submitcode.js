@@ -8,7 +8,8 @@ const path = require("path");
 const outputPath = path.join(__dirname, "..", "codes");
 
 const submitCode = async (req, res) => {
-  const { language = "cpp", code, id, probname, mail } = req.body;
+  const { language = "cpp", code, id, probname } = req.body;
+  const mail = req.email
   const newSub = new Sub();
   newSub["language"] = language;
   newSub["problemid"] = id;
@@ -37,7 +38,7 @@ const submitCode = async (req, res) => {
   const totalcases = testcases.length;
   let output;
   for (let i = 0; i < testcases.length; i++) {
-    try {
+    try { 
       const inputfile = await generateInput(testcases[i].input);
       if(language==='cpp'){
         output = await executeCpp(filepath);

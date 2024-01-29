@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React from 'react';
+
 import { useNavigate } from 'react-router-dom';
 export default function Nav(){
     const handle=sessionStorage.getItem('handle')
@@ -7,6 +9,7 @@ export default function Nav(){
 
     const logout=()=>{
         sessionStorage.clear();
+        delete axios.defaults.headers.common["Authorization"];
         Nav('/')
     }
     return(
