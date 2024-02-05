@@ -6,4 +6,5 @@ RUN apk add build-base
 # RUN cd client && npm run build
 # RUN cp ./build/. -r ../server/views
 RUN cd server && npm i
+WORKDIR /app/server
 CMD ["npm","run","dev"]
