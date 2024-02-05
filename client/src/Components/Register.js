@@ -12,7 +12,7 @@ export default function Register() {
     e.preventDefault();
     try {
       axios
-        .post("http://localhost:8000/register", { mail, pass, name, handle })
+        .post("http://localhost:8000/signup", { mail, pass, name, handle })
         .then((res) => {
           if (res.data === "exists") {
             alert("User already exists");

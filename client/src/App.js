@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Problem from "./Components/Problem";
 import "./App.css";
 import Problemset from "./Components/Problemset";
@@ -17,6 +18,18 @@ function App() {
   // const logOut = () => {
   //   setisLoggedIn(false);
   // };
+
+  (function() {
+    const token = sessionStorage.getItem('token')
+    if (token) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    } else {
+        axios.defaults.headers.common['Authorization'] = null;
+        /*if setting null does not remove `Authorization` header then try     
+          delete axios.defaults.headers.common['Authorization'];
+        */
+    }
+  })();
 
   return (
     <>

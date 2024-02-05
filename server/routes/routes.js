@@ -8,10 +8,15 @@ const {checkToken} = require('../checkToken.js')
 const router = express.Router();
 // const {getTestcases} = require('../getTestcases.js')
 
+const path = __dirname + '../views/';
+router.get('/', function (req,res) {
+    res.sendFile(path + "index.html");
+});
+
 router.get('/getAllproblems',checkToken, getProblems);
 router.post('/getstatement',checkToken,getStatement)
 router.post('/login',checkLogin)
-router.post('/register',signup)
+router.post('/signup',signup)
 router.post('/run',checkToken,runCode)
 router.post('/submit',checkToken,submitCode)
 router.post('/getsubmissions',checkToken,getSubs)
