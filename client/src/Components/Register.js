@@ -1,4 +1,5 @@
 import React from "react";
+import { API_URL } from "./Api";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,7 +13,7 @@ export default function Register() {
     e.preventDefault();
     try {
       axios
-        .post("http://localhost:8000/signup", { mail, pass, name, handle })
+        .post(`${API_URL}/signup`, { mail, pass, name, handle })
         .then((res) => {
           if (res.data === "exists") {
             alert("User already exists");

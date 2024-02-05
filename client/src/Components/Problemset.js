@@ -1,4 +1,5 @@
 import React from 'react';
+import { API_URL } from './Api';
 import Nav from './Nav';
 import Probcard from './Probcard';
 import axios from 'axios';
@@ -11,7 +12,7 @@ export default function Problemset(){
     useEffect(() => {
         const getdata= async () =>{
             try {
-                await axios.get("http://localhost:8000/getAllproblems").then(res=>setData(res.data))
+                await axios.get(`${API_URL}/getAllproblems`).then(res=>setData(res.data))
             } catch (error) {
                 console.log(error,"something went wrong")
             }

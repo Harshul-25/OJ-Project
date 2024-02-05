@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from './Nav'
+import { API_URL } from "./Api";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import stubs from "./stubs";
@@ -25,7 +26,7 @@ export default function IDE(){
             input: input
         }
         try {
-            const {data} = await axios.post("http://localhost:8000/run", payload)
+            const {data} = await axios.post(`${API_URL}/run`, payload)
             setOutput("Output: \n"+data.output)
             console.log(data)
         } catch (error) {

@@ -1,4 +1,5 @@
 import React from "react";
+import { API_URL } from "./Api";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import stubs from "./stubs";
@@ -36,7 +37,7 @@ export default function SubEditor({ id, name , codecontent, lang}) {
       input: input,
     };
     try {
-      const { data } = await axios.post("http://localhost:8000/run", payload);
+      const { data } = await axios.post(`${API_URL}/run`, payload);
       setOutput("Output: \n" + data.output);
     } catch (error) {
       const msg = error.response.data.err.stderr;
@@ -51,7 +52,7 @@ export default function SubEditor({ id, name , codecontent, lang}) {
     e.target.disabled = false;
   };
 
-  const usermail = sessionStorage.getItem("mail");
+  // const usermail = sessionStorage.getItem("mail");
   const handleSubmit = async (e) => {
     e.target.disabled = true;
     setOutput("Loading...");
@@ -61,11 +62,11 @@ export default function SubEditor({ id, name , codecontent, lang}) {
       code: code,
       id: id,
       probname: name,
-      mail: usermail,
+      // mail: usermail,
     };
     try {
       const { data } = await axios.post(
-        "http://localhost:8000/submit",
+        `${API_URL}/submit`,
         payload
       );
       const { accepted, totalcases } = data;

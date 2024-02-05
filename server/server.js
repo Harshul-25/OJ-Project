@@ -7,7 +7,7 @@ const app = express();
 
 const path = __dirname + '/views/';
 
-// app.use(cors());
+app.use(cors());
 app.use(express.static(path));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

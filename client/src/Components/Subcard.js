@@ -1,10 +1,11 @@
 import React from "react";
+import { API_URL } from "./Api";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 export default function Subcard({id,name,code,verdict,lang,time}){
     const Nav = useNavigate();
     const handleClick = async ()=>{
-        const desc = await axios.post("http://localhost:8000/getstatement",{id})
+        const desc = await axios.post(`${API_URL}/getstatement`,{id})
         const description=desc.data;
         sessionStorage.setItem('fromsub',true);
         Nav(`/problem/${id}`,{state: {name,description,code,lang}})

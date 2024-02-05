@@ -1,4 +1,5 @@
 import React from "react";
+import { API_URL } from "./Api";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +11,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      axios.post("http://localhost:8000/login", { mail, pass }).then((res) => {
+      axios.post(`${API_URL}/login`, { mail, pass }).then((res) => {
         if (res.data.status === "failed") {
           alert("Please enter valid email or password");
         } else if (res.data.status === "success") {

@@ -1,4 +1,5 @@
 import React from "react";
+import { API_URL } from "./Api";
 import Nav from "./Nav";
 import Subcard from "./Subcard";
 import { useState, useEffect } from "react";
@@ -12,7 +13,7 @@ export default function Submissions() {
     const getdata = async () => {
       try {
         await axios
-          .post("http://localhost:8000/getsubmissions", { mail })
+          .post(`${API_URL}/getsubmissions`, { mail })
           .then((res) => setData(res.data));
       } catch (error) {
         console.log(error, "something went wrong");
