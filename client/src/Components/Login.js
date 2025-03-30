@@ -1,56 +1,77 @@
 import React from "react";
+import { useState } from "react";
 import { API_URL } from "./Api";
 import axios from "axios";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
-  const [mail, setMail] = useState("");
-  const [pass, setPass] = useState("");
   const Nav = useNavigate();
-  const handleSubmit = (e) => {
+  const [data, setData] = useState({ mail: "", pass: "" });
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+    setError("");
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (!data.mail || !data.pass) {
+        setError("Please enter both email and password.");
+        return;
+    }
+
     try {
-      axios.post(`${API_URL}/login`, { mail, pass }).then((res) => {
-        if (res.data.status === "failed") {
-          alert("Please enter valid email or password");
-        } else if (res.data.status === "success") {
-          sessionStorage.setItem('token',res.data.token)
-          axios.defaults.headers.common["Authorization"] = `Bearer ${res.data.token}`;
-          // sessionStorage.setItem('mail',res.data.check.email)
-          sessionStorage.setItem('handle',res.data.handle)
-          Nav("/problemset");
-        }
-      });
+      const result = await axios.post(`${API_URL}/login`, data);
+      const token = result.data.token;
+      const mail = result.data.mail;
+      const handle = result.data.handle;
+      sessionStorage.setItem("token", token);
+      sessionStorage.setItem("mail", mail);
+      sessionStorage.setItem('handle',handle)
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      Nav("/problemset");
     } catch (error) {
-      console.log(error)
+      console.log(error);
+      if (error.response && error.response.data && error.response.data.message) {
+        setError(error.response.data.message);
+      } else {
+        setError("An unexpected error occurred during login.");
+      }
+      delete axios.defaults.headers.common["Authorization"];
     }
   };
+
   return (
     <div className="form-wrapper">
-      <form onSubmit={handleSubmit}>
-        <h2 style={{ padding: "1rem" }}>Login</h2>
-        <label htmlFor="email">email</label>
-        <input
-          value={mail}
-          onChange={(e) => setMail(e.target.value)}
-          type="email"
-          id="email"
-          required
-        />
-        <label htmlFor="password">password</label>
-        <input
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-          type="password"
-          id="password"
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-      <button>
-        <Link to="/register">Don't have a account register here</Link>
-      </button>
+      <div className="form-container">
+          <h1>Login</h1>
+           {error && <p style={{color: 'red', marginBottom: '1rem'}}>{error}</p>}
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="mail">Email:</label>
+            <input
+              type="email"
+              name="mail"
+              id="mail"
+              value={data.mail}
+              onChange={handleChange}
+              required
+            />
+            <label htmlFor="pass">Password:</label>
+            <input
+              type="password"
+              name="pass"
+              id="pass"
+              value={data.pass}
+              onChange={handleChange}
+              required
+            />
+            <button type="submit">Login</button>
+          </form>
+      </div>
+      <Link to="/register" className="switch-form-button">Don't have an account? Register</Link>
     </div>
   );
 }

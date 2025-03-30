@@ -9,7 +9,7 @@ export default function Probcard({id,name,description,tag}){
 
     return(
     <div className="pcard" onClick={handleClick}>
-        {name}
+        <span className="problem-name">{name}</span>
         <div className="tag">
             {tag}
         </div>

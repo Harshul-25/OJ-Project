@@ -20,11 +20,12 @@ export default function Submissions() {
       }
     };
     getdata();
-  },[]);
+  },[mail]);
 
-  const subs = data.map((i) => {
+  const subs = data.map((i, index) => {
     return (
       <Subcard
+        key={index}
         id={i.problemid}
         name={i.probname}
         code={i.code}
@@ -39,7 +40,15 @@ export default function Submissions() {
     <div className="problem-page">
       <h2> {handle} submissions </h2>
       <Nav />
-      <div className="problems-wrapper">{subs}</div>
+      <div className="problems-wrapper">
+        <div className="submission-header">
+            <div className="sub-element">Time</div>
+            <div className="sub-element">Problem</div>
+            <div className="sub-element">Language</div>
+            <div className="sub-element">Verdict</div>
+        </div>
+        {subs}
+      </div>
     </div>
   );
 }

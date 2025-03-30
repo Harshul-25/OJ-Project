@@ -1,6 +1,6 @@
 const stubs = {};
 
-stubs.cpp = `#include <bits/stdc++.h>
+stubs.cpp = `#include <iostream>
 using namespace std;
 
 int main() {

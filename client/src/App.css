@@ -1,398 +1,1339 @@
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Roboto:wght@400;500&display=swap');
 
-html,body {
-  height:100%;
+html, body {
+  height: 100%;
+  font-family: 'Roboto', sans-serif; /* More consistent base font */
 }
-#root,#root2{
+#root, #root2 {
   height: 100%;
   display: flex;
   justify-content: center;
+  background-color: #f8f9fa; /* Lighter background for the whole app */
 }
-#root2{
+#root2 {
   width: 100%;
 }
-*{
-  /* padding: 10px; */
-  margin:0;
-  /* border: solid 2px black; */
+* {
+  margin: 0;
+  padding: 0; /* Reset padding */
   box-sizing: border-box;
 }
 
-.nav-wrapper{
-  font-family: 'Roboto', sans-serif;
+/* === Navbar Improvements === */
+.nav-wrapper {
+  font-family: 'Poppins', sans-serif; /* Use Poppins for nav */
   font-weight: 500;
-  overflow-x: auto;
-  height: 10%;
+  height: auto; /* Allow height to adjust based on content */
   min-height: 60px;
+  background-color: #343a40; /* Dark background */
+  color: #f8f9fa; /* Light text */
+  padding: 0; /* Remove wrapper padding */
+  width: 100%; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  margin-bottom: 10px; 
+  /* margin: 0 auto; */ /* REMOVE margin auto from wrapper */
+  /* padding: 5px 0; */ /* REMOVE padding from wrapper */
+  overflow-x: auto; /* Allow horizontal scrolling */
+  overflow-y: hidden; /* Prevent vertical scrollbar */
 }
 
-.navbar{
+/* Navbar Brand */
+.navbar-brand {
+    font-size: 1.4em; /* Larger font size */
+    font-weight: 600; /* Bolder */
+    color: #ffffff; /* White color */
+    text-decoration: none; /* Remove underline */
+    padding: 5px 10px; /* Add some padding */
+    margin-right: 25px; /* Space between brand and links */
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+.navbar-brand:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle hover */
+}
+
+.navbar {
   display: flex;
+  align-items: center; /* Vertically center items */
+  justify-content: space-between; /* Space out content and user info */
   height: 100%;
-  background-color: #343a40;
-  min-width: 600px;
-  padding: 5px;
+  min-height: 60px;
+  /* max-width: 1200px; */ /* Remove max-width or set to a large value if needed */
+  margin: 0 auto; /* Center the content *within* the scrollable area */
+  padding: 5px 15px; /* Add horizontal padding *inside* navbar */
+  min-width: fit-content; /* Ensure navbar takes at least the width of its content */
 }
 
-.nav-content{
-  width: 100%;
-  height: 100%;
+.nav-content {
   display: flex;
   list-style: none;
-  padding: 5px;
-  min-width: 405px;
+  padding: 0;
+  margin: 0 auto; 
+  align-items: center;
+  font-weight: 500;
+  /* transition: background-color 0.2s ease, color 0.2s ease; */ /* Moved transition to link */
+  flex-shrink: 0; /* Prevent link list from shrinking */
 }
 
-.nav-content>li{
+.nav-content > li {
   text-align: center;
-  min-width: 75px;
-  background-color: #e8e8e4;
-  margin-left: 20px;
-  padding:5px;
-  padding-top: 10px;
+  padding: 10px 15px; /* Adjust padding */
+  margin-left: 15px; /* Adjust spacing */
   border-radius: 5px;
-}
-
-.nav-content>li:hover{
   cursor: pointer;
-  background-color: #8e9aaf;
-  color:white;
+  transition: background-color 0.2s ease, color 0.2s ease; /* Smooth transition */
+  color: #dee2e6; /* Lighter text color */
 }
 
-.nav-content>div{
+/* Style the NavLink directly */
+.nav-content li a { /* Target the anchor tag within the li */
+    display: block; /* Make link fill the li */
+    padding: 10px 15px; /* Apply padding to the link */
+    color: #dee2e6;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-content li a:hover {
+  background-color: #495057;
+  color: #ffffff;
+  transform: translateY(-1px); /* Slight lift on hover */
+}
+
+/* Active NavLink Style */
+.nav-content li a.active {
+  background-color: #007bff; /* Use primary color for active */
+  color: #ffffff; /* White text for active */
+  font-weight: 600; /* Make active link bolder */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2); /* Add subtle inset shadow */
+}
+
+.nav-user-info { /* Container for user handle and logout */
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
   text-align: center;
-  padding: 5px;
 }
 
-.navbar>div{
-  font-size: 18px;
-  background-color: #fec5bb;
-  margin-top:8px;
-  margin-bottom: 8px;
-  margin-right: 20px;
-  padding: 5px;
-  border-radius: 5px;
+.nav-user-info > div {
+  font-size: 16px; /* Slightly smaller font */
+  background-color: #6c757d; /* Grey background */
+  color: #ffffff; /* White text */
+  margin-left: 15px; /* Space between items */
+  padding: 8px 12px; /* Adjust padding */
 }
 
-.navbar>div:nth-of-type(1){
-  background-color: #e8e8e4;
-
+/* Specific styling for logout button */
+.nav-user-info .logout-button {
+    background-color: #6c757d;
+    cursor: pointer;
+    transition: background-color 0.15s ease-in-out;
+    border-radius: 5px; /* Ensure consistent radius */
+    padding: 8px 12px; /* Ensure consistent padding */
+    font-size: 15px; /* Slightly adjust */
+    margin-left: 10px; /* Adjust spacing */
+}
+.nav-user-info .logout-button:hover {
+  background-color: #dc3545; /* Red hover for logout */
 }
 
-.navbar>div:nth-of-type(1):hover{
+/* Specific styling for user handle */
+.nav-user-info .user-handle {
+    background-color: transparent; /* Make background transparent */
+    color: #e9ecef; /* Lighter text color */
+    cursor: default; /* Indicate it's not clickable */
+    border: 1px solid #495057; /* Add a subtle border */
+    border-radius: 5px; /* Ensure consistent radius */
+    padding: 7px 12px; /* Adjust padding to align with border */
+    font-size: 15px; /* Slightly adjust */
+    margin-left: 10px; /* Adjust spacing */
+}
+
+/* === Theme Toggle Switch Styles === */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 60px; /* Width of the switch */
+  height: 30px; /* Height of the switch */
+  margin-left: 15px; /* Spacing */
   cursor: pointer;
-  background-color: #8e9aaf;
-  color: whitesmoke;
+  vertical-align: middle; /* Align with other buttons */
+  border: none; /* Explicitly remove border */
+  background-color: transparent; /* Explicitly remove background */
+  padding: 0; /* Remove padding if any */
 }
 
-.main-wrapper{
-  padding: 5px;
+/* Hide default HTML checkbox */
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.theme-slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Default light mode background */
+  transition: .4s;
+  border-radius: 30px;
+}
+
+/* The moving knob */
+.theme-slider::before {
+  position: absolute;
+  content: "";
+  height: 22px; /* Size of the knob */
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+/* Icon positioning */
+.theme-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    transition: opacity 0.4s ease;
+    z-index: 1; /* Ensure icons are above slider bg */
+}
+.theme-icon-light {
+    left: 8px;
+    opacity: 1; /* Visible in light mode */
+}
+.theme-icon-dark {
+    right: 8px;
+    opacity: 0; /* Hidden in light mode */
+}
+
+
+/* Checked state (Dark Mode) */
+input:checked + .theme-slider {
+  background-color: #007bff; /* Blue background for dark mode */
+}
+
+input:checked + .theme-slider::before {
+  transform: translateX(30px); /* Move knob to the right */
+}
+
+input:checked ~ .theme-icon-light {
+    opacity: 0; /* Hide light icon */
+}
+
+input:checked ~ .theme-icon-dark {
+    opacity: 1; /* Show dark icon */
+}
+
+/* Dark theme overrides for the switch itself */
+body.dark-theme .theme-slider {
+    background-color: #555; /* Dark grey background */
+}
+
+body.dark-theme input:checked + .theme-slider {
+  background-color: #0d6efd; /* Use the slightly darker blue */
+}
+
+body.dark-theme .theme-slider::before {
+  background-color: #333; /* Darker knob */
+}
+
+/* === Main Content Wrapper === */
+.main-wrapper {
+  padding: 10px; /* Consistent padding */
   width: 100%;
   max-width: 1900px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  overflow: hidden; /* Hide main wrapper overflow */
 }
 
-.main-content{
-  background-color: #E9ECEF;
-
+/* === Problem Statement & Editor Layout === */
+.main-content-resizable {
+  background-color: #ffffff; 
+  border: 1px solid #dee2e6; 
+  border-radius: 8px; 
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
   flex-grow: 1;
-  box-sizing: border-box;
   display: flex;
+  overflow: hidden; 
+  height: calc(100% - 70px); /* Adjust height considering navbar */
 }
 
-.statement{
+.statement {
   font-family: 'Poppins', sans-serif;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 1;
-  width: 50%;
-}
-
-.editor{
-  display: flex;
-  width: 50%;
-  flex-direction: column;
-}
-
-.editor>textarea{
-  resize: none;
-  width: 100%;
-  height: 65%;
-  padding: 10px;
-  font-size: 15px;
-  background-color: #dee2e6;
-  border: solid #212529 2px;
-}
-
-.statement{
-  height: 100%;
-  padding: 20px;
+  padding: 25px;
+  overflow-y: auto; 
+  background-color: #f8f9fa; 
   white-space: pre-wrap;
+  height: 100%; /* Ensure statement fills panel height */
 }
 
-
-
-.problem-page{
-  padding: 5px;
-  height: 100%;
-  width: 100%;
-  max-width: 1900px;
-  display: flex;
-  flex-direction: column;
-}
-.problem-page>h1{
-  background-color: #d8e2dc;
-  text-align: center;
-  padding:25px 0 ;
+.statement h3 { /* Style section headers */
+  margin-top: 15px;
+  margin-bottom: 10px;
+  color: #343a40;
 }
 
-.problem-page>h2{
-  background-color: #d8e2dc;
-  height: 10%;
-  text-align: center;
-  padding-top: 10px;
-}
-
-.problems-wrapper{
-  background-color: #E9ECEF;
-  height: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-}
-
-.pcard{
-  border-bottom: solid black;
-  background-color: #CED4DA;
-  font-size: 20px;
-  width: 100%;
-  max-width: 1200px;
-  min-height: 70px;
-  height: 13%;
-  border-radius: 5px;
-  margin-top: 18px;
-  align-self: center;
-  display: flex;
-  padding :10px
-}
-
-.pcard:hover{
-  cursor: pointer;
-  background-color: #6c757d;
-  color: white;
-}
-
-.subcard{
-  background-color: #CED4DA;
-  width: 100%;
-  font-size: 18px;
-  max-width: 1200px;
-  min-height: 70px;
-  height: 13%;
-  border-radius: 5px;
-  margin-top: 18px;
-  align-self: center;
-  display: flex;
-  padding :10px
-}
-
-.subcard:hover{
-  cursor: pointer;
-  background-color: #6c757d;
-  color: white;
-}
-
-.sub-element{
-  border: solid black 2px;
-  text-align: center;
+.statement pre { /* Style code blocks */
+  background-color: #e9ecef;
   padding: 10px;
-  flex:1
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: monospace;
 }
 
-.sub-element:nth-of-type(2){
-  flex: 2
+/* === Editor Component Improvements === */
+.editor {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; 
+  position: relative; 
+  background-color: #ffffff; 
+  height: 100%; /* Ensure editor fills panel height */
 }
 
-.tag{
-  min-width: 70px;
-  text-align: center;
-  border: solid black 2px;
-  margin-right: 10px;
-  margin-left: auto;
-  border-radius: 10px;
-  padding: 5px;
-  font-size: 15px;
+/* Style for the resize handle */
+.resize-handle {
+    background-color: #e9ecef; /* Light grey handle */
+    width: 6px; /* Width of the draggable handle */
+    cursor: col-resize; /* Indicate horizontal resize */
+    transition: background-color 0.2s ease;
+    display: flex; /* Needed for potential icons inside */
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
 }
 
-.form-wrapper{
+.resize-handle:hover {
+    background-color: #ced4da; /* Darker grey on hover */
+}
+
+.resize-handle[data-resize-handle-active] { /* Style when dragging */
+    background-color: #adb5bd; /* Even darker when active */
+}
+
+/* Optionally add dots/icon to the handle */
+/* 
+.resize-handle::before {
+    content: "\22EE"; Vertical ellipsis 
+    color: #6c757d;
+    font-size: 12px;
+}
+*/
+
+/* Style for the Monaco Editor container (if used later) */
+.editor-container {
+  flex-grow: 1; /* Allow editor to take available space */
+  height: 65%; /* Default height */
+  overflow: auto; /* Allow scrolling within editor */
+  border-bottom: 1px solid #dee2e6; /* Separator */
+  resize: vertical; /* Allow vertical resizing */
+  min-height: 200px; /* Minimum editor height */
+}
+
+/* Style for the basic textarea (until replaced) */
+.editor > textarea {
+  resize: vertical; /* Make textarea resizable */
   width: 100%;
-  background: linear-gradient(#e66465, #9198e5);
+  height: 65%; /* Adjust initial height */
+  min-height: 200px; /* Minimum height */
+  padding: 15px; /* Increased padding */
+  font-size: 15px;
+  font-family: monospace; /* Monospace font for code */
+  background-color: #ffffff; /* White background */
+  border: none; /* Remove default border */
+  border-bottom: 1px solid #dee2e6; /* Separator line */
+  outline: none; /* Remove focus outline */
+}
+
+
+/* === Problemset/Submissions Page === */
+.problem-page {
+  padding: 0; /* Remove padding, handled by main-wrapper */
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Hide overflow */
+}
+
+.problem-page > h1, .problem-page > h2 {
+  background-color: #e9ecef; /* Light grey background */
+  color: #343a40; /* Dark text */
+  text-align: center;
+  padding: 15px 0; /* Adjust padding */
+  margin: 0; /* Remove margin */
+  font-weight: 600; /* Bolder title */
+  border-bottom: 1px solid #dee2e6; /* Separator */
+}
+.problem-page > h2 {
+  padding: 10px 0;
+  font-size: 1.5em; /* Slightly smaller than H1 */
+  font-weight: 500;
+}
+
+.problems-wrapper {
+  background-color: #f8f9fa; /* Lighter background */
+  flex-grow: 1; /* Take remaining space */
+  padding: 20px; /* Add padding around cards */
+  overflow-y: auto; /* Allow scrolling for cards */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center cards horizontally */
+}
+
+/* === Problem Card Improvements === */
+.pcard {
+  background-color: #ffffff; /* White background */
+  border: 1px solid #dee2e6; /* Subtle border */
+  font-size: 18px; /* Adjust font size */
+  width: 100%;
+  max-width: 900px; /* Limit card width */
+  min-height: 70px;
+  border-radius: 8px; /* Rounded corners */
+  margin-top: 15px; /* Space between cards */
+  align-self: center;
+  display: flex;
+  align-items: center; /* Vertically center content */
+  padding: 15px 20px; /* Adjust padding */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth transition */
+}
+
+.pcard:hover {
+  cursor: pointer;
+  background-color: #f1f3f5; /* Lighter hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Enhanced shadow */
+  color: #212529; /* Ensure text color remains dark */
+}
+
+.pcard .problem-name { /* Add class for name if needed */
+  flex-grow: 1; /* Allow name to take space */
+  margin-right: 15px; /* Space before tag */
+  font-weight: 500; /* Medium weight */
+}
+
+.tag {
+  min-width: 80px; /* Adjust width */
+  text-align: center;
+  border: 1px solid #adb5bd; /* Lighter border */
+  border-radius: 15px; /* Pill shape */
+  padding: 5px 10px; /* Adjust padding */
+  font-size: 13px; /* Smaller font */
+  color: #495057; /* Grey text */
+  background-color: #e9ecef; /* Light grey background */
+  margin-left: auto; /* Pushes tag to the right */
+  flex-shrink: 0; /* Prevent tag from shrinking */
+}
+
+/* === Submission Card Improvements === */
+.submission-header { /* Style for header row in submissions */
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  padding: 10px 20px;
+  font-weight: 600;
+  color: #495057;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.subcard {
+  background-color: #ffffff;
+  width: 100%;
+  font-size: 16px; /* Adjust font size */
+  max-width: 1000px; /* Adjust max width */
+  min-height: 60px; /* Adjust height */
+  border-radius: 8px;
+  margin-top: 10px; /* Adjust spacing */
+  align-self: center;
+  display: flex;
+  padding: 10px 20px; /* Adjust padding */
+  border: 1px solid #dee2e6;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: background-color 0.2s ease;
+  align-items: center; /* Vertically align items */
+}
+
+.subcard:hover {
+  cursor: pointer;
+  background-color: #f1f3f5;
+  color: #212529;
+}
+
+.sub-element {
+  text-align: left; /* Left align text */
+  padding: 8px 10px; /* Adjust padding */
+  flex: 1; /* Distribute space equally by default */
+  white-space: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Add ellipsis for overflow */
+  border: none; /* Remove old borders */
+}
+
+/* Adjust flex basis for specific columns */
+.sub-element:nth-of-type(1) { /* Time */
+  flex-basis: 20%;
+  min-width: 140px; /* Ensure enough space for timestamp */
+}
+.sub-element:nth-of-type(2) { /* Problem Name */
+  flex-basis: 35%;
+  font-weight: 500; /* Make name slightly bolder */
+}
+.sub-element:nth-of-type(3) { /* Language */
+  flex-basis: 15%;
+  text-align: center; /* Center language */
+}
+.sub-element:nth-of-type(4) { /* Verdict */
+  flex-basis: 15%;
+  text-align: center; /* Center verdict */
+  font-weight: 500;
+}
+/* Add specific styles for Verdict text */
+.sub-element.verdict-accepted {
+    color: #28a745; /* Green for Accepted */
+}
+.sub-element.verdict-wrong {
+    color: #dc3545; /* Red for Wrong Answer */
+}
+.sub-element.verdict-error {
+    color: #fd7e14; /* Orange for Error */
+}
+
+/* === Login/Register Form === */
+.form-wrapper {
+  width: 100%;
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); Updated Gradient */
+  background-color: #e9ecef; /* Simpler background */
   display: flex;
   flex-direction: column;
   min-height: 100%;
   align-items: center;
   justify-content: center;
-  padding: 5rem;
+  padding: 2rem; /* Reduced padding */
 }
-.form-wrapper>form{
+
+.form-container { /* Add a container for the form */
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px; /* Increased max-width */
+}
+
+.form-container h1 { /* Style form title */
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #343a40;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-wrapper form {
   width: 100%;
-  height: 80%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 300px;
-  
-}
-.form-wrapper>form{
   display: flex;
   flex-direction: column;
 }
 
-.form-wrapper>form>label{
+.form-wrapper form label {
   text-align: left;
-  padding: .5rem;
+  padding: 0; /* Remove padding */
+  margin-bottom: 0.5rem; /* Add space below label */
+  font-weight: 500;
+  color: #495057;
 }
 
-.form-wrapper>form>input{
-  margin: 0.5rem 0;
-  padding: 1rem;
-  border: none;
-  border-radius: 10px;
+.form-wrapper form input {
+  margin: 0 0 1rem 0; /* Adjust margin */
+  padding: 0.8rem 1rem; /* Adjust padding */
+  border: 1px solid #ced4da; /* Add border */
+  border-radius: 5px;
+  font-size: 1rem; /* Consistent font size */
+}
+.form-wrapper form input:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 }
 
-.form-wrapper>form>button{
+.form-wrapper form button {
   border: none;
-  background-color: beige;
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #007bff; /* Primary button color */
+  color: white;
+  padding: 0.8rem 1.5rem; /* Adjust padding */
+  border-radius: 5px;
   cursor: pointer;
-}
-
-.form-wrapper>button{
-  background: none;
-  border: none;
-  padding: 20px;
-  border-radius: 10px;
-  text-decoration: underline;
-}
-
-.output{
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 35%;
-}
-
-.output>textarea,.output>p{
-  resize: none;
-  border: solid black 1px;
-  background-color: #f8f9fa;
-  display: block;
-  width: 100%;
-  height: 95%;
-}
-
-.output>textarea{
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  font-size: 17px;
-}
-
-.output>button{
-  padding: 10px;
-}
-
-.window-btns{
- display: flex;
-}
-
-.window-btns>button{
-  margin-left: 15px;
-  width: 25%;
-  padding: 5px;
-  font-family:'Courier New', Courier, monospace;
-  font-size: 1rem
-}
-
-.submit-btns{
-  display: flex;
-}
-
-.submit-btns>button{
-  font-family:'Roboto', Courier, monospace;
   font-size: 1rem;
   font-weight: 500;
-  margin-left: 15px;
-  padding: 5px;
-  width: 25%;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem; /* Add space above button */
+}
+.form-wrapper form button:hover {
+    background-color: #0056b3; /* Darker hover */
 }
 
-.ide-wrapper{
-  background-color: #E9ECEF;
+.form-wrapper > .switch-form-button { /* Style the switch link/button */
+  background: none;
+  border: none;
+  padding: 10px;
+  margin-top: 1rem; /* Space above */
+  border-radius: 5px;
+  text-decoration: none; /* Remove underline */
+  color: #007bff;
+  cursor: pointer;
+}
+.form-wrapper > .switch-form-button:hover {
+    text-decoration: underline;
+}
 
+
+/* === Editor/IDE Output Section === */
+.output {
   display: flex;
   flex-direction: column;
   width: 100%;
+  height: 35%; /* Default height */
+  min-height: 150px; /* Minimum height */
+  background-color: #f8f9fa; /* Light background for output area */
+  border-top: 1px solid #dee2e6; /* Separator line */
 }
 
-.ide{
+/* New rule for the container holding the I/O Monaco Editor */
+.io-editor-container {
+    height: calc(100% - 40px); /* Fill space below controls */
+    width: 100%;
+    overflow: hidden; /* Let the editor handle scroll */
+    position: relative; /* Needed for absolute positioning of placeholder */
+}
+
+/* Placeholder style for Monaco Editor */
+.monaco-placeholder {
+    position: absolute;
+    top: 5px; /* Adjust as needed */
+    left: 60px; /* Adjust based on Monaco's internal padding/line numbers area */
+    color: #888; /* Placeholder text color */
+    font-size: 13px; /* Match editor font size */
+    font-family: monospace; /* Match editor font family */
+    pointer-events: none; /* Allow clicks to pass through */
+    z-index: 1; /* Ensure it's above the editor content but below controls */
+    /* Hide if editor has focus or content - handled by conditional rendering in JS */
+}
+
+.output-controls { /* Wrapper for buttons */
   display: flex;
-  width: 75%;
-  height: 100%;
+  justify-content: space-between; /* Space out button groups */
+  padding: 8px 15px; /* Padding for button area */
+  border-bottom: 1px solid #e9ecef; /* Subtle line above text area */
+  background-color: #f1f3f5; /* Slightly different bg for controls */
+  height: 40px; /* Fixed height for controls */
+  align-items: center;
+}
+
+
+.window-btns, .submit-btns {
+ display: flex;
+ gap: 10px; /* Add space between buttons */
+}
+
+.window-btns > button, .submit-btns > button {
+  margin: 0; /* Remove margin */
+  padding: 5px 12px; /* Adjust padding */
+  font-family:'Roboto', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid #ced4da; /* Button border */
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #ffffff; /* White background */
+  color: #495057; /* Dark text */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.window-btns > button.active, /* Style for active tab button */
+.window-btns > button:hover {
+    background-color: #e9ecef;
+    border-color: #adb5bd;
+}
+
+.submit-btns > button {
+    min-width: 80px; /* Ensure buttons have minimum width */
+}
+
+/* Run button style */
+.submit-btns > button:first-child {
+    background-color: #28a745; /* Green */
+    border-color: #28a745;
+    color: #ffffff;
+}
+.submit-btns > button:first-child:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+.submit-btns > button:first-child:disabled { /* Disabled style */
+    background-color: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
+}
+
+
+/* Submit button style */
+.submit-btns > button:last-child {
+    background-color: #007bff; /* Blue */
+    border-color: #007bff;
+    color: #ffffff;
+}
+.submit-btns > button:last-child:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+.submit-btns > button:last-child:disabled { /* Disabled style */
+    background-color: #6c757d;
+    border-color: #6c757d;
+    cursor: not-allowed;
+}
+
+
+/* === IDE Page Specifics === */
+.ide-wrapper {
+  background-color: #f8f9fa; /* Consistent background */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%; /* Ensure full height */
+  overflow: hidden; /* Prevent content spillover */
+}
+
+.ide {
+  display: flex;
+  width: 90%; /* Increase width */
+  max-width: 1400px; /* Add max-width */
+  height: calc(100% - 80px); /* Adjust height considering nav and padding */
   flex-direction: column;
   align-self: center;
+  margin-top: 10px; /* Space below nav */
+  background-color: #ffffff; /* White background */
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden; /* Prevent content spillover */
 }
 
-.ide>textarea{
-  width: 100%;
-  height: 75%;
+/* Container for Monaco Editor in IDE */
+.ide-editor-container {
+  flex-grow: 1; /* Allow it to grow/shrink */
+  height: 65%; /* Default height 65% */
+  min-height: 250px; /* Adjusted Min height */
+  border-bottom: 1px solid #dee2e6;
+  resize: vertical; /* Allow vertical resize */
+  overflow: auto; /* Important for resize and editor scrollbars */
+  position: relative; /* Needed for Monaco's layout */
 }
 
-.lang{
-  font-size: 1rem;
-  padding: 8px;
+/* IDE Output Section */
+.ide .output { /* Target output specifically within ide */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 35%; /* Default height 35% */
+    min-height: 150px; /* Minimum height */
+    background-color: #f8f9fa;
+    border-top: none; /* Remove border-top, already have border-bottom on editor */
+    /* Ensure output itself doesn't resize, only editor container */
+    resize: none; 
 }
 
-.lang>label{
-  padding: 5px;
+/* Ensure controls are styled correctly within IDE output */
+.ide .output .output-controls {
+    height: 40px; /* Keep consistent height */
+    border-bottom: 1px solid #e9ecef;
+    background-color: #f1f3f5;
 }
-.lang>select{
 
-  width: 100px;
+/* Ensure text areas/paragraphs fill the remaining space in IDE output */
+/* REMOVE this rule as .io-editor-container now handles height */
+/*
+.ide .output > textarea,
+.ide .output > p {
+    height: calc(100% - 40px); 
+}
+*/
+
+.lang {
+  font-size: 0.9rem; /* Adjust font size */
+  padding: 8px 15px; /* Adjust padding */
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6; /* Separator */
+  display: flex; /* Use flexbox */
+  align-items: center; /* Align items vertically */
 }
 
-iframe{
+.lang > label {
+  padding: 0; /* Remove padding */
+  margin-right: 8px; /* Add space after label */
+  font-weight: 500;
+  color: #495057;
+}
+.lang > select {
+  width: 120px; /* Adjust width */
+  padding: 4px 8px; /* Adjust padding */
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  background-color: #ffffff;
+}
+
+
+iframe {
   display: none;
 }
 
-@media screen and (max-width: 550px) {
-  .main-content{
+/* === Responsive Adjustments === */
+@media screen and (max-width: 768px) {
+  /* Remove styles targeting the resizable panel group for mobile */
+  /*
+  .main-content-resizable {
     flex-direction: column;
+    height: auto; 
   }
-  .main-wrapper{
-    overflow: auto;
-  }
-  .statement{
-    width: 100%; height: 100%;
-    min-height: 50vh;
-  }
-  .editor{
-    width: 100%;
-    min-height: 40vh;
-  }
-  .editor>textarea{
-    width: 100%;
-    height: 50%;
-  }
-  .output{
-    height: 50%;
+  */
+  
+  /* Styles for the simple stacked layout on mobile */
+  .main-content-stacked {
+      display: flex; 
+      flex-direction: column;
+      width: 100%; 
+      flex-grow: 1; /* Allow it to take space */
+      /* Remove fixed height, border, shadow etc. from container 
+         Let the main-wrapper handle scrolling */
   }
 
-  .ide>textarea{
-    height: 100%;
+  .main-wrapper {
+    overflow-y: auto; 
+    height: 100%; /* Make wrapper full height to contain scroll */
+    padding: 5px; 
+  }
+
+  /* Apply base statement/editor styles to mobile versions */
+  .statement-mobile, .editor-mobile {
+      width: 100%;
+      height: auto; /* Let content determine height */
+  }
+
+  .statement-mobile {
+      /* Reuse statement styles */
+      font-family: 'Poppins', sans-serif;
+      padding: 20px; /* Slightly less padding for mobile */
+      background-color: #f8f9fa; 
+      white-space: pre-wrap;
+      min-height: 200px; /* Adjust min-height as needed */
+      border-bottom: 1px solid #dee2e6;
+  }
+
+  .editor-mobile {
+      /* Reuse editor styles */
+      display: flex; 
+      flex-direction: column;
+      background-color: #ffffff; 
+      min-height: 350px; /* Adjust min-height as needed */
+      /* Remove border-bottom if it was added previously */
+  }
+  
+  /* Apply dark theme overrides specifically for mobile stacked view */
+  body.dark-theme .main-content-stacked {
+      /* No background needed here */
+  }
+  body.dark-theme .statement-mobile {
+      background-color: #252525;
+      border-bottom-color: #444;
+      color: #e0e0e0;
+  }
+   body.dark-theme .statement-mobile h1 {
+       color: #f1f1f1;
+   }
+   body.dark-theme .statement-mobile h3 {
+      color: #f8f9fa;
+  }
+   body.dark-theme .statement-mobile pre {
+      background-color: #333;
+      color: #f1f1f1;
+  }
+  body.dark-theme .editor-mobile {
+       background-color: #2c2c2c;
+  }
+  
+  /* Remove styles targeting statement/editor directly in this breakpoint 
+     as they are now handled by -mobile classes */
+  /* 
+  .statement, .editor {
+    width: 100%;
+    height: auto; 
+    border-right: none; 
+    border-bottom: 1px solid #dee2e6; 
+  }
+  body.dark-theme .statement, body.dark-theme .editor {
+      border-bottom-color: #444;
+  }
+   .editor {
+      border-bottom: none; 
+   }
+  .statement {
+    min-height: 250px; 
+  }
+  .editor {
+    min-height: 350px; 
+  }
+  */
+
+  /* Adjust Monaco container height within editor-mobile */
+  .editor-mobile .editor-container {
+      height: 40vh; 
+      min-height: 200px;
+      resize: none; 
+      border-bottom: 1px solid #dee2e6; 
+  }
+  body.dark-theme .editor-mobile .editor-container {
+      border-bottom-color: #444;
+  }
+  
+   /* Adjust output height within editor-mobile */
+  .editor-mobile .output {
+       height: auto; 
+       min-height: 180px;
+       border-top: 1px solid #dee2e6; 
+  }
+   body.dark-theme .editor-mobile .output {
+       border-top-color: #444;
+   }
+
+   .editor-mobile .io-editor-container {
+       height: calc(100% - 40px); 
+       min-height: 140px; 
+   }
+
+  /* === Styles for other elements within 768px breakpoint === */
+
+  .ide {
+      width: 98%; /* Wider on mobile */
+      height: calc(100vh - 65px); /* Adjust height considering smaller nav */
+      margin-top: 5px; 
+  }
+  .ide-editor-container {
+      height: 55%; 
+      min-height: 180px;
+      resize: none; /* Disable manual resize */
+  }
+  .ide .output {
+      height: 45%; 
+      min-height: 150px;
+  }
+
+  /* Navbar adjustments */
+  .nav-wrapper {
+      padding: 0; /* Ensure no padding */
+      min-height: 55px;
+  }
+  .navbar {
+      min-height: 55px;
+      padding: 5px 10px; /* Adjust padding */
+      justify-content: flex-start; /* Align items to start for scrolling */
+      margin: 0; /* No auto margin needed when scrolling */
+  }
+   .navbar-brand {
+      font-size: 1.2em;
+      margin-right: 15px;
+  }
+  .nav-content li a {
+      padding: 8px 10px;
+      font-size: 0.9rem;
+  }
+  .nav-content > li {
+      margin-left: 8px;
+  }
+  .nav-user-info .logout-button,
+  .nav-user-info .user-handle,
+  .nav-user-info .theme-switch { /* Include theme-switch here */
+      /* padding: 6px 10px; Ensure switch styles handle padding */
+      font-size: 14px;
+      margin-left: 8px;
+      /* Remove specific background/border for switch here, handled by main switch styles */
+  }
+  .nav-user-info .logout-button,
+  .nav-user-info .user-handle {
+     padding: 6px 10px; /* Re-apply specific padding */
+  }
+  
+
+  /* Card adjustments */
+  .pcard, .subcard, .submission-header {
+      max-width: 100%; /* Full width cards */
+      padding: 10px 15px;
+  }
+  .sub-element {
+      font-size: 14px; 
+      padding: 5px;
+  }
+   .sub-element:nth-of-type(1) { 
+      min-width: 110px;
+      flex-basis: 25%;
+   }
+    .sub-element:nth-of-type(2) { 
+      flex-basis: 40%;
+   }
+   /* Hide language on small screens if too cramped */
+   /* .sub-element:nth-of-type(3) { display: none; } */
+   
+}
+
+@media screen and (max-width: 550px) { 
+
+  /* Optionally hide elements or stack nav differently */
+  .nav-content {
+     /* Maybe hide some items? */
+  }
+  .nav-user-info .user-handle { /* Hide handle on very small screens */
+      display: none;
+  }
+  .form-container {
+      padding: 1.5rem; 
+      max-width: 95%;
+  }
+
+  /* Submission card adjustments */
+   .sub-element:nth-of-type(1) { 
+      min-width: 90px;
+      flex-basis: 30%;
+   }
+    .sub-element:nth-of-type(2) { 
+      flex-basis: 45%;
+   }
+    .sub-element:nth-of-type(3) { /* Hide language */
+       display: none; 
+   }
+    .sub-element:nth-of-type(4) { 
+       flex-basis: 25%;
+   }
+   .submission-header .sub-element:nth-of-type(3) { /* Hide language header */
+       display: none;
+   }
+}
+
+/* === Dark Main Content Areas === */
+/* REMOVE this block - rules should only be inside body.dark-theme */
+/*
+body.dark-theme .main-wrapper {
+  background-color: #252525;
+}
+body.dark-theme .main-content-resizable {
+  background-color: #333;
+  border-color: #444;
+}
+body.dark-theme .statement {
+  background-color: #252525;
+  color: #e0e0e0;
+  scrollbar-color: #555 #252525;
+}
+body.dark-theme .statement h1 { 
+  color: #f1f1f1;
+}
+body.dark-theme .statement h3 {
+  color: #f8f9fa;
+}
+body.dark-theme .statement pre {
+  background-color: #333; 
+  color: #f1f1f1;
+}
+*/
+
+/* === Dark Problem Statement === */
+/* REMOVE this block - rules should only be inside body.dark-theme */
+/*
+.statement {
+  background-color: #252525; 
+  color: #e0e0e0;
+  scrollbar-color: #555 #252525;
+}
+.statement h1 { 
+  color: #f1f1f1;
+}
+.statement h3 {
+  color: #f8f9fa;
+}
+.statement pre {
+  background-color: #333; 
+  color: #f1f1f1;
+}
+*/
+
+/* REMOVE this block - rules should only be inside body.dark-theme */
+/*
+.statement-mobile {
+  background-color: #252525;
+  border-bottom-color: #444;
+  color: #e0e0e0;
+}
+body.dark-theme .statement-mobile h1 { 
+  color: #f1f1f1;
+}
+body.dark-theme .statement-mobile h3 {
+  color: #f8f9fa;
+}
+body.dark-theme .statement-mobile pre {
+  background-color: #333;
+  color: #f1f1f1;
+}
+*/
+
+/* === Dark Problemset/Submissions Page Titles === */
+/* REMOVE this block - rules should only be inside body.dark-theme */
+/*
+.problem-page > h1, .problem-page > h2 {
+  background-color: #2c2c2c; 
+  color: #f1f1f1;
+  border-bottom-color: #444;
+}
+*/
+
+body.dark-theme {
+  #root, #root2 {
+    background-color: #1a1a1a; 
+    color: #e0e0e0; 
+  }
+
+  /* === Dark Navbar === */
+  .nav-wrapper {
+    background-color: #212529; 
+    color: #f8f9fa;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); 
+  }
+  .navbar-brand {
+    color: #ffffff;
+  }
+  .navbar-brand:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+  }
+  .nav-content li a {
+    color: #adb5bd; 
+  }
+  .nav-content li a:hover {
+    background-color: #495057;
+    color: #ffffff;
+  }
+  .nav-content li a.active {
+    background-color: #0d6efd; 
+    color: #ffffff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .nav-user-info .logout-button {
+    background-color: #495057;
+    color: #e0e0e0;
+  }
+  .nav-user-info .logout-button:hover {
+    background-color: #c82333; 
+  }
+  .nav-user-info .user-handle {
+    background-color: transparent;
+    color: #adb5bd;
+    border-color: #6c757d;
+  }
+  /* Dark Theme Toggle Switch */
+  .theme-slider {
+      background-color: #555; 
+  }
+  input:checked + .theme-slider {
+    background-color: #0d6efd; 
+  }
+  .theme-slider::before {
+    background-color: #333; 
+  }
+
+  /* === Dark Main Content Wrappers === */
+   .main-wrapper { /* Add dark background for main page area */
+      background-color: #1a1a1a;
+  }
+  .main-content-resizable, 
+  .ide, 
+  .form-container 
+  {
+    background-color: #2c2c2c; 
+    border-color: #444; 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  }
+  .problems-wrapper { /* Problemset/Submissions list area */
+    background-color: #1a1a1a; 
+  }
+
+  /* === Dark Problem Statement (Desktop & Mobile Shared/Base) === */
+  .statement, .statement-mobile {
+    background-color: #252525; 
+    color: #e0e0e0;
+    scrollbar-color: #555 #252525; 
+  }
+  .statement h1, .statement-mobile h1 { 
+      color: #f1f1f1;
+  }
+  .statement h3, .statement-mobile h3 { 
+    color: #f8f9fa;
+  }
+  .statement pre, .statement-mobile pre { 
+    background-color: #333; 
+    color: #f1f1f1;
+  }
+  /* Mobile border */
+  .statement-mobile {
+    border-bottom-color: #444;
+  }
+  
+  /* === Dark Problemset/Submissions Page Titles === */
+  .problem-page > h1, .problem-page > h2 {
+      background-color: #2c2c2c; 
+      color: #f1f1f1;
+      border-bottom-color: #444;
+  }
+
+  /* === Dark Editor Wrapper (Monaco handles its own theme) === */
+  .editor, .editor-mobile {
+    background-color: #2c2c2c;
+  }
+  /* Mobile editor borders */
+  .editor-mobile .editor-container {
+      border-bottom-color: #444;
+  }
+  .editor-mobile .output {
+       border-top-color: #444;
+  }
+
+  /* === Dark Resize Handle === */
+  .resize-handle {
+    background-color: #3a3a3a;
+    border-color: #555;
+  }
+  .resize-handle:hover {
+    background-color: #555;
+  }
+  .resize-handle[data-resize-handle-active] {
+    background-color: #666;
+  }
+
+  /* === Dark Problem/Submission Cards === */
+  .pcard, .subcard {
+    background-color: #333;
+    border-color: #555;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    color: #e0e0e0;
+  }
+  .pcard:hover, .subcard:hover {
+    background-color: #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+  }
+  .tag {
+    border-color: #6c757d;
+    color: #adb5bd;
+    background-color: #495057;
+  }
+  .submission-header {
+      color: #adb5bd;
+      border-bottom-color: #555;
+  }
+  /* Verdict colors */
+  .sub-element.verdict-accepted {
+      color: #33cc55; 
+  }
+  .sub-element.verdict-wrong {
+      color: #ff4d4d;
+  }
+  .sub-element.verdict-error {
+      color: #ffaa33;
+  }
+
+  /* === Dark Login/Register Form === */
+  .form-wrapper {
+      background-color: #1a1a1a; 
+  }
+  .form-container h1 {
+      color: #f8f9fa;
+  }
+  .form-wrapper form label {
+      color: #adb5bd;
+  }
+  .form-wrapper form input {
+      background-color: #3a3a3a;
+      border-color: #555;
+      color: #e0e0e0;
+  }
+  .form-wrapper form input:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.35);
+      background-color: #404040; 
+  }
+  .form-wrapper form button {
+      background-color: #0d6efd; 
+  }
+   .form-wrapper form button:hover {
+      background-color: #0b5ed7;
+  }
+  .form-wrapper > .switch-form-button {
+      color: #3c91ff; 
+  }
+
+  /* === Dark Output/IO Section === */
+  .output {
+    background-color: #252525;
+    border-top-color: #444;
+  }
+  .output-controls {
+    background-color: #333;
+    border-bottom-color: #444;
+  }
+  .window-btns > button, .submit-btns > button {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #adb5bd;
+  }
+  .window-btns > button.active, 
+  .window-btns > button:hover {
+      background-color: #495057;
+      border-color: #6c757d;
+      color: #f1f1f1;
+  }
+   .submit-btns > button:disabled {
+      background-color: #555;
+      border-color: #555;
+      color: #888;
+   }
+   .monaco-placeholder {
+      color: #666; 
+   }
+   
+  /* === Dark IDE Specifics === */
+  .ide {
+      background-color: #2c2c2c;
+      border-color: #444;
+  }
+  .ide .lang {
+      background-color: #333;
+      border-bottom-color: #444;
+  }
+  .ide .lang label {
+      color: #adb5bd;
+  }
+  .ide .lang select {
+      background-color: #3a3a3a;
+      border-color: #555;
+      color: #e0e0e0;
   }
 }
 

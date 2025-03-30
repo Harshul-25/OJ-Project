@@ -28,7 +28,11 @@ const runCode = async (req, res) => {
 
     return res.json({ filepath, output });
   } catch (err) {
-    res.status(500).json({ err });
+    // err likely contains { error: "sanitized message" } from executeFile
+    console.error("Run Code Error:", err);
+    // Send back in the format frontend might expect (check frontend code)
+    // Assuming frontend checks error.response.data.message or error.response.data.err
+    res.status(500).json({ message: err.error || "Code execution failed", err: err }); // Pass sanitized message
   }
 };
 

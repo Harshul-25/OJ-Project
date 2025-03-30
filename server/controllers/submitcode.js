@@ -54,9 +54,11 @@ const submitCode = async (req, res) => {
         accepted = accepted + 1;
       }
     } catch (err) {
+      console.error(`Submission Execution Error (Testcase ${i}):`, err);
       newSub["verdict"] = "Error";
       await newSub.save();
-      return res.status(500).json({ err });
+      fs.emptyDirSync(outputPath);
+      return res.status(500).json({ message: err.error || "Submission failed during execution", err: err });
     }
   }
   fs.emptyDirSync(outputPath);
