@@ -1,0 +1,16 @@
+name: Keep Render Service Alive # Name of the workflow
+
+on:
+  schedule:
+    # Runs every 12 minutes
+    - cron: '*/12 * * * *' # Important: Use cron syntax, less than 15 mins
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest # Use a standard GitHub runner
+    steps:
+      - name: Ping Render App URL # Description of the step
+        run: curl -fS "https://oj-project.onrender.com/" # Command to run
+        # Explanation of flags:
+        # -f : Fail silently (don't output HTML) on server errors. Crucial to prevent Action failure on temp app issues.
+        # -S : Show error message if curl fails, despite -f.
